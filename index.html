@@ -1,0 +1,61 @@
+<html lang="en">
+
+<head>
+  <!-- HTML Meta Tags -->
+	<title>Response Display</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Collect and display resposes from various devices." />
+  <meta name="canonical" href="https://tylergordonhill.com/response-display
+" />
+	<meta name="theme-color" content="#128A74" />
+
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="Response Display" />
+	<meta property="og:description" content="Collect and display resposes from various devices."
+	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://tylergordonhill.com/recipes
+" />
+	<meta property="og:image" content="https://tylergordonhill.com/images/linkpreview.png" />
+
+	<!-- Twitter Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="tylergordonhill.com" />
+	<meta property="twitter:url" content="https://tylergordonhill.com/response-display
+" />
+	<meta name="twitter:title" content="Response Display" />
+	<meta name="twitter:description" content="Collect and display resposes from various devices."
+	/>
+	<meta name="twitter:image" content="https://tylergordonhill.com/images/linkpreview.png" />
+
+	<!-- Link Tags -->
+	<link rel="icon" href="/images/tabicon.png" />
+	<link href="response-display/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h2 id="title">Response Display</h2>
+    <a id="byLine" href="/">Tyler Gordon Hill</a>
+  </header>
+  <main>
+    <form id="form">
+      <input id="input" type="text">
+      <input type="submit" value="Submit">
+    </form>
+    <div id="display">
+      <h3>Loading...</h3>
+    </div>
+    <div id="options">
+      <button id="clear">Clear</button>
+      <button id="hide">Hide</button>
+    </div>
+  </main>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <script src="response-display/script.js"></script>
+</body>
+
+</html>

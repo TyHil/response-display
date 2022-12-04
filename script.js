@@ -19,9 +19,9 @@ class Database {
   }
   parse(response) {
     if (response.exists()) {
-      return Object.values(response.val());
+      return response.val();
     } else {
-      return [];
+      return "";
     }
   }
   get() {
@@ -61,40 +61,61 @@ class Database {
   }
 }
 
-const database = new Database(firebase.database().ref());
+const responses = new Database(firebase.database().ref('/responses'));
+const hide = new Database(firebase.database().ref('/hide'));
 
 
 
 /* Display */
 
 class Display {
-  constructor(element) {
-    this.element = element;
+  constructor(displayElement, hideElement) {
+    this.displayElement = displayElement;
+    this.hideElement = hideElement;
   }
   render(list) {
-    for (const item of list) {
+    this.hideElement.children[1].innerText = ' (' + Object.keys(list).length + ')';
+    for (const key in list) {
       const p = document.createElement('p');
-      p.innerText = item;
-      p.addEventListener('click', function() {
-        this.classList.toggle('clicked');
+      p.innerText = list[key].value;
+      if (list[key].highlight) {
+        p.classList.add('clicked');
+      }
+      p.addEventListener('click', () => {
+        list[key].highlight = !list[key].highlight;
+        responses.set(list);
       });
-      this.element.append(p);
+      this.displayElement.append(p);
     }
   }
   clear() {
-    while (this.element.firstChild) {
-      this.element.removeChild(this.element.firstChild);
+    while (this.displayElement.firstChild) {
+      this.displayElement.removeChild(this.displayElement.firstChild);
+    }
+  }
+  hide(state) {
+    if (state) {
+      this.hideElement.children[0].innerText = 'Reveal';
+      this.displayElement.style.display = 'none';
+    } else {
+      this.hideElement.children[0].innerText = 'Hide';
+      this.displayElement.style.display = 'flex';
     }
   }
 }
 
-const display = new Display(document.getElementById('display'));
+const display = new Display(document.getElementById('display'), document.getElementById('hide'));
 
 
 
 /* Render */
 
-database.listen((list) => {
+display.hide(hide.get());
+hide.listen((state) => {
+  display.hide(state);
+});
+
+responses.listen((list) => {
   display.clear();
   display.render(list);
 });
@@ -104,7 +125,7 @@ database.listen((list) => {
 /* Submit */
 
 document.getElementById('form').onsubmit = function(val) {
-  database.push(val.srcElement[0].value);
+  responses.push({value: val.target[0].value, highlight: 0});
   this.reset();
   return false;
 };
@@ -114,16 +135,9 @@ document.getElementById('form').onsubmit = function(val) {
 /* Options */
 
 document.getElementById('clear').addEventListener('click', () => {
-  database.clear();
+  responses.clear();
 });
 
 document.getElementById('hide').addEventListener('click', function() {
-  const displayElement = document.getElementById('display');
-  if (this.classList.contains('hidden')) {
-    this.classList.remove('hidden');
-    displayElement.style.display = 'flex';
-  } else {
-    this.classList.add('hidden');
-    displayElement.style.display = 'none';
-  }
+  hide.set(this.children[0].innerText === 'Hide');
 });

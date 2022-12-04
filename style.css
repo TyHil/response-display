@@ -197,9 +197,6 @@ button {
   height: 1.25rem;
   padding: 0.6rem 0.75rem 0.45rem 0.75rem;
 }
-#hide.hidden, p.clicked {
-  background-color: var(--dark2);
-}
-#hide.hidden:hover {
-  background-color: var(--dark1);
+p.clicked {
+  opacity: 0.25;
 }

@@ -118,7 +118,6 @@ class ResponsesDisplay extends Display {
     }
   }
   hide(state) {
-    console.log('hi');
     if (state) {
       this.hideElement.children[0].innerText = 'Reveal';
       this.displayElement.style.display = 'none';

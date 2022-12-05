@@ -146,9 +146,10 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 #responses, #players {
+  margin-top: 0.5rem;
   max-width: 75ch;
   display: flex;
   gap: 0.5rem;

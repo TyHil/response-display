@@ -37,19 +37,23 @@
   </header>
   <main>
     <form id="form">
-      <input id="input" type="text">
+      <input id="newResponse" type="text">
       <input type="submit" value="Submit">
     </form>
-    <div id="display">
+    <div id="responses">
       <h3>Loading...</h3>
     </div>
     <div id="options">
-      <button id="clear">Clear</button>
+      <button id="responsesClear">Clear</button>
       <button id="hide">
         <span></span>
         <span></span>
       </button>
     </div>
+    <div id="players">
+      <input id="newPlayer" type="text">
+    </div>
+    <button id="playersClear">Clear</button>
   </main>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>

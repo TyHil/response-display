@@ -148,19 +148,26 @@ main {
   align-items: center;
   gap: 1rem;
 }
-#display {
+#responses, #players {
   max-width: 75ch;
   display: flex;
-  flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+}
+#responses {
+  flex-direction: column;
+}
+#players {
+  flex-wrap: wrap;
+}
+.response {
+  background-color: var(--dark1);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 p {
   margin: 0;
   overflow-wrap: break-word;
-  background-color: var(--dark1);
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 form {
   margin: 0;
@@ -179,15 +186,15 @@ input, button {
   color: var(--light0);
   box-sizing: content-box;
 }
-input, button, p {
+input, button, .response, .player {
   transition: background-color 200ms;
   cursor: pointer;
 }
-input {
+#form input {
   height: 1.6rem;
   padding: 0.8rem 1rem 0.6rem 1rem;
 }
-input:hover, button:hover, p:hover {
+input:hover, button:hover, .response:hover, .player:hover {
   background-color: var(--dark2);
 }
 input[type=text] {
@@ -197,6 +204,34 @@ button {
   height: 1.25rem;
   padding: 0.6rem 0.75rem 0.45rem 0.75rem;
 }
-p.clicked {
+.response.clicked, .player.clicked {
   opacity: 0.25;
+}
+.player {
+  flex: 1 1rem;
+  background-color: var(--dark1);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.player p {
+  max-width: calc(75ch - 1rem);
+}
+.player div {
+  display: flex;
+  gap: 0.25rem;
+}
+.player button {
+  padding: 0.2rem 0.5rem 0.15rem 0.5rem;
+  background-color: var(--dark0);
+}
+.player button:hover {
+  background-color: var(--dark1);
+}
+#newPlayer {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 999rem;
 }

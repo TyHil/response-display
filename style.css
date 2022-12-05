@@ -149,7 +149,6 @@ main {
   gap: 0.5rem;
 }
 #responses, #players {
-  margin-top: 0.5rem;
   max-width: 75ch;
   display: flex;
   gap: 0.5rem;
@@ -160,6 +159,7 @@ main {
 }
 #players {
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 .response {
   background-color: var(--dark1);
@@ -174,6 +174,7 @@ form {
   margin: 0;
   width: 100%;
   max-width: 75ch;
+  margin-bottom: 0.5rem;
 }
 form, #options {
   display: flex;

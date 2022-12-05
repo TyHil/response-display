@@ -1,16 +1,22 @@
 /* Firebase */
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBqUCCFOsGpHaYAMk7Lgpp1PeWC34lCS4s",
-  authDomain: "tylergordonhill-c8339.firebaseapp.com",
-  databaseURL: "https://tylergordonhill-c8339-default-rtdb.firebaseio.com",
-  projectId: "tylergordonhill-c8339",
-  storageBucket: "tylergordonhill-c8339.appspot.com",
-  messagingSenderId: "10243950475",
-  appId: "1:10243950475:web:ff9abba5961c2fc49c918e"
+  apiKey: 'AIzaSyBqUCCFOsGpHaYAMk7Lgpp1PeWC34lCS4s',
+  authDomain: 'tylergordonhill-c8339.firebaseapp.com',
+  databaseURL: 'https://tylergordonhill-c8339-default-rtdb.firebaseio.com',
+  projectId: 'tylergordonhill-c8339',
+  storageBucket: 'tylergordonhill-c8339.appspot.com',
+  messagingSenderId: '10243950475',
+  appId: '1:10243950475:web:ff9abba5961c2fc49c918e'
 });
 
 firebase.appCheck().activate('6LfVw0sjAAAAAN0-OJ7XqY-MmsV2dFz_uOAP2QET', true);
+
+const firebaseRef = firebase.database().ref();
+
+
+
+/* Database */
 
 class Database {
   constructor(ref) {
@@ -20,7 +26,7 @@ class Database {
     if (response.exists()) {
       return response.val();
     } else {
-      return "";
+      return '';
     }
   }
   get() {
@@ -32,26 +38,14 @@ class Database {
       });
     });
   }
-  set(data) {
-    return new Promise((resolve, reject) => {
-      this.ref.set(data).then(resolve).catch((error) => {
-        reject(error);
-      });
-    });
+  set(data, path = '/') {
+    return this.ref.child(path).set(data);
   }
   clear() {
-    return new Promise((resolve, reject) => {
-      this.ref.remove().then(resolve).catch((error) => {
-        reject(error);
-      });
-    });
+    return this.ref.remove();
   }
   push(data) {
-    return new Promise((resolve, reject) => {
-      this.ref.push().set(data).then(resolve).catch((error) => {
-        reject(error);
-      });
-    });
+    return this.ref.push().set(data);
   }
   listen(callback) {
     this.ref.on('value', (response) => {
@@ -60,25 +54,17 @@ class Database {
   }
 }
 
-const responsesDatabase = new Database(firebase.database().ref('/responses'));
-const hideDatabase = new Database(firebase.database().ref('/hide'));
-const playersDatabase = new Database(firebase.database().ref('/players'));
+const responsesDatabase = new Database(firebaseRef.child('/response-display/responses'));
+const hideDatabase = new Database(firebaseRef.child('/response-display/hide'));
+const playersDatabase = new Database(firebaseRef.child('/response-display/players'));
 
 
 
-/* Display */
+/* Responses Display */
 
-class Display {
-  constructor(displayElement) {
-    this.displayElement = displayElement;
-  }
-  render() {}
-  clear() {}
-}
-
-class ResponsesDisplay extends Display {
+class ResponsesDisplay {
   constructor(displayElement, hideElement) {
-    super(displayElement);
+    this.displayElement = displayElement;
     this.hideElement = hideElement;
   }
   render(list) {
@@ -90,13 +76,13 @@ class ResponsesDisplay extends Display {
     for (const key in list) {
       const p = document.createElement('p');
       p.classList.add('response');
+      p.tabIndex = 0;
       p.innerText = list[key].value;
       if (list[key].highlight) {
         p.classList.add('clicked');
       }
       p.addEventListener('click', () => {
-        list[key].highlight = !list[key].highlight;
-        responsesDatabase.set(list);
+        responsesDatabase.set(!list[key].highlight, '/' + key + '/highlight');
       });
       const oldResponses = this.displayElement.querySelectorAll('.response.old');
       let found = 0;
@@ -140,11 +126,19 @@ class ResponsesDisplay extends Display {
 
 const responsesDisplay = new ResponsesDisplay(document.getElementById('responses'), document.getElementById('hide'));
 
-class PlayersDisplay extends Display {
+
+
+/* Players Display */
+
+class PlayersDisplay {
+  constructor(displayElement) {
+    this.displayElement = displayElement;
+  }
   render(list) {
     for (const key in list) {
       const div = document.createElement('div');
       div.classList.add('player');
+      div.tabIndex = 0;
       const p = document.createElement('p');
       p.innerText = list[key].name + ' (' + list[key].score + ')';
       div.append(p);
@@ -152,15 +146,13 @@ class PlayersDisplay extends Display {
       const add = document.createElement('button');
       add.innerText = 'Add';
       add.addEventListener('click', () => {
-        list[key].score++;
-        playersDatabase.set(list);
+        playersDatabase.set(list[key].score + 1, '/' + key + '/score');
       });
       buttonDiv.append(add);
       const subtract = document.createElement('button');
       subtract.innerText = 'Subtract';
       subtract.addEventListener('click', () => {
-        list[key].score--;
-        playersDatabase.set(list);
+        playersDatabase.set(list[key].score - 1, '/' + key + '/score');
       });
       buttonDiv.append(subtract);
       div.append(buttonDiv);
@@ -169,8 +161,7 @@ class PlayersDisplay extends Display {
       }
       div.addEventListener('click', function(e) {
         if (e.target === this || e.target === this.children[0] || e.target === this.children[1]) {
-          list[key].highlight = !list[key].highlight;
-          playersDatabase.set(list);
+          playersDatabase.set(!list[key].highlight, '/' + key + '/highlight');
         }
       });
       this.displayElement.insertBefore(div, document.getElementById('newPlayer'));
@@ -187,23 +178,23 @@ const playersDisplay = new PlayersDisplay(document.getElementById('players'));
 
 
 
-/* Render */
+/* Listen and render */
 
 let firstTime = 1;
 responsesDatabase.listen((list) => {
   if (firstTime) {
     firstTime = 0;
-    responsesDisplay.clear(list);
+    responsesDisplay.clear();
   }
   responsesDisplay.render(list);
 });
 document.getElementById('responsesClear').addEventListener('click', () => {
   responsesDatabase.clear();
 });
+
 document.getElementById('hide').addEventListener('click', function() {
   hideDatabase.set(this.children[0].innerText === 'Hide');
 });
-
 responsesDisplay.hide(hideDatabase.get());
 hideDatabase.listen((state) => {
   responsesDisplay.hide(state);
@@ -236,5 +227,15 @@ newPlayer.addEventListener('change', addPlayer);
 newPlayer.addEventListener('keydown', function(e) {
   if (e.key === 'Enter') {
     addPlayer();
+  }
+});
+
+
+
+/* Enter and Space */
+
+document.body.addEventListener('keydown', function(e) { //enable enter while tabbing over spans
+  if ((e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') && document.activeElement !== null && (document.activeElement.classList.contains('response') || document.activeElement.classList.contains('player'))) {
+    document.activeElement.click();
   }
 });

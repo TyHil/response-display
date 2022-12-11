@@ -63,10 +63,11 @@ const playersDatabase = new Database(firebaseRef.child('/response-display/player
 /* Display */
 
 class Display {
-  constructor(displayElement, hideElement, toHide) {
+  constructor(displayElement, hideElement, extraHides, elementFunctions) {
     this.displayElement = displayElement;
     this.hideElement = hideElement;
-    this.toHide = toHide;
+    this.extraHides = extraHides;
+    this.elementFunctions = elementFunctions;
   }
   render() {}
   clear() {
@@ -74,7 +75,19 @@ class Display {
       this.displayElement.removeChild(this.displayElement.firstChild);
     }
   }
-  hide() {}
+  shuffle() {}
+  hide(state) {
+    if (state) {
+      this.hideElement.innerText = 'Reveal';
+      this.displayElement.style.display = 'none';
+      this.extraHides.extraHide();
+    } else {
+      this.shuffle();
+      this.hideElement.innerText = 'Hide';
+      this.displayElement.style.display = 'flex';
+      this.extraHides.extraShow();
+    }
+  }
 }
 
 
@@ -82,8 +95,12 @@ class Display {
 /* Responses Display */
 
 class ResponsesDisplay extends Display {
+  constructor(displayElement, hideElement, countElement, extraHides, elementFunctions) {
+    super(displayElement, hideElement, extraHides, elementFunctions);
+    this.countElement = countElement;
+  }
   render(list) {
-    this.hideElement.children[1].innerText = ' (' + Object.keys(list).length + ')';
+    this.countElement.innerText = ' (' + Object.keys(list).length + ')';
     const responses = this.displayElement.getElementsByClassName('response');
     for (let i = 0; i < responses.length; i++) {
       responses[i].classList.add('old');
@@ -97,7 +114,7 @@ class ResponsesDisplay extends Display {
         p.classList.add('clicked');
       }
       p.addEventListener('click', () => {
-        responsesDatabase.set(!list[key].highlight, '/' + key + '/highlight');
+        this.elementFunctions.highlight(!list[key].highlight, key);
       });
       const oldResponses = this.displayElement.querySelectorAll('.response.old');
       let found = 0;
@@ -118,29 +135,27 @@ class ResponsesDisplay extends Display {
       this.displayElement.removeChild(oldResponses[i]);
     }
   }
-  hide(state) {
-    if (state) {
-      this.hideElement.children[0].innerText = 'Reveal';
-      this.displayElement.style.display = 'none';
-      this.toHide.forEach(item => {
-        item[0].style.display = 'none';
-      });
-    } else {
-      if (this.displayElement.children.length) {
-        for (let i = this.displayElement.children.length; i >= 0; i--) {
-            this.displayElement.append(this.displayElement.children[Math.random() * i | 0]);
-        }
+  shuffle() {
+    if (this.displayElement.children.length) {
+      for (let i = this.displayElement.children.length; i >= 0; i--) {
+          this.displayElement.append(this.displayElement.children[Math.random() * i | 0]);
       }
-      this.hideElement.children[0].innerText = 'Hide';
-      this.displayElement.style.display = 'flex';
-      this.toHide.forEach(item => {
-        item[0].style.display = item[1];
-      });
     }
   }
 }
 
-const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'), [[document.getElementById('responsesClear'), 'block']]);
+const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide').children[0], document.getElementById('responsesHide').children[1], {
+  'extraHide': () => {
+    document.getElementById('responsesClear').style.display = 'none';
+  }, 
+  'extraShow': () => {
+  document.getElementById('responsesClear').style.display = 'flex';
+  }
+}, {
+  'highlight': (set, key) => {
+    responsesDatabase.set(set, '/' + key + '/highlight');
+  }
+});
 
 
 
@@ -156,19 +171,25 @@ class PlayersDisplay extends Display {
       p.innerText = list[key].name + ' (' + list[key].score + ')';
       div.append(p);
       const buttonDiv = document.createElement('div');
+      const remove = document.createElement('button');
+      remove.innerText = 'Remove';
+      remove.addEventListener('click', () => {
+        this.elementFunctions.remove(key);
+      });
+      buttonDiv.append(remove);
       const subtract = document.createElement('button');
       subtract.innerText = 'Subtract';
       subtract.addEventListener('click', () => {
-        playersDatabase.set(list[key].score - 1, '/' + key + '/score');
+        this.elementFunctions.set(list[key].score - 1, key);
       });
       buttonDiv.append(subtract);
       const add = document.createElement('button');
       add.innerText = 'Add';
       add.addEventListener('click', () => {
-        playersDatabase.set(list[key].score + 1, '/' + key + '/score');
+        this.elementFunctions.set(list[key].score + 1, key);
       });
       buttonDiv.append(add);
-      [subtract, add].forEach(item => {
+      [remove, subtract, add].forEach(item => {
         item.addEventListener('mouseover', () => {
           div.classList.add('buttonHover');
         });
@@ -182,36 +203,40 @@ class PlayersDisplay extends Display {
       }
       div.addEventListener('click', function(e) {
         if (e.target === this || e.target === this.children[0] || e.target === this.children[1]) {
-          playersDatabase.set(!list[key].highlight, '/' + key + '/highlight');
+          this.elementFunctions.highlight(!list[key].highlight, key);
         }
       });
       this.displayElement.append(div);
     }
   }
-  hide(state) {
-    if (state) {
-      this.hideElement.innerText = 'Reveal';
-      this.displayElement.style.display = 'none';
-      this.toHide.forEach(item => {
-        item[0].style.display = 'none';
-      });
-    } else {
-      this.hideElement.innerText = 'Hide';
-      this.displayElement.style.display = 'flex';
-      this.toHide.forEach(item => {
-        item[0].style.display = item[1];
-      });
-    }
-  }
 }
 
-const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay'), document.getElementById('playersHide'), [[document.getElementById('playersClear'), 'block'], [document.getElementById('playerInput'), 'flex']]);
+const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay'), document.getElementById('playersHide'), {
+  'extraHide': () => {
+    document.getElementById('playersClear').style.display = 'none';
+    document.getElementById('playerInput').style.display = 'none';
+  }, 
+  'extraShow': () => {
+  document.getElementById('playersClear').style.display = 'block';
+  document.getElementById('playerInput').style.display = 'flex';
+  }
+}, {
+  'remove': (key) => {
+    playersDatabase.clear('/' + key);
+  },
+  'set': (set, key) => {
+    playersDatabase.set(set, '/' + key + '/score');
+  },
+  'highlight': (set, key) => {
+    responsesDatabase.set(set, '/' + key + '/highlight');
+  }
+});
 
 
 
 /* Listen and render */
 
-//Responses
+//Responses listen
 let firstTime = 1;
 responsesDatabase.listen((list) => {
   if (firstTime) {
@@ -220,6 +245,8 @@ responsesDatabase.listen((list) => {
   }
   responsesDisplay.render(list);
 });
+
+//Responses clear
 document.getElementById('responsesClear').addEventListener('click', () => {
   responsesDatabase.clear();
 });
@@ -228,16 +255,17 @@ document.getElementById('responsesClear').addEventListener('click', () => {
 document.getElementById('responsesHide').addEventListener('click', function() {
   hideDatabase.set(this.children[0].innerText === 'Hide');
 });
-responsesDisplay.hide(hideDatabase.get());
 hideDatabase.listen((state) => {
   responsesDisplay.hide(state);
 });
 
-//Players
+//Players listen
 playersDatabase.listen((list) => {
   playersDisplay.clear();
   playersDisplay.render(list);
 });
+
+//Players clear
 document.getElementById('playersClear').addEventListener('click', () => {
   playersDatabase.clear();
 });

@@ -41,8 +41,8 @@ class Database {
   set(data, path = '/') {
     return this.ref.child(path).set(data);
   }
-  clear() {
-    return this.ref.remove();
+  clear(path = '/') {
+    return this.ref.child(path).remove();
   }
   push(data) {
     return this.ref.push().set(data);
@@ -60,13 +60,27 @@ const playersDatabase = new Database(firebaseRef.child('/response-display/player
 
 
 
-/* Responses Display */
+/* Display */
 
-class ResponsesDisplay {
+class Display {
   constructor(displayElement, hideElement) {
     this.displayElement = displayElement;
     this.hideElement = hideElement;
   }
+  render() {}
+  clear() {
+    while (this.displayElement.firstChild) {
+      this.displayElement.removeChild(this.displayElement.firstChild);
+    }
+  }
+  hide() {}
+}
+
+
+
+/* Responses Display */
+
+class ResponsesDisplay extends Display {
   render(list) {
     this.hideElement.children[1].innerText = ' (' + Object.keys(list).length + ')';
     const responses = this.displayElement.getElementsByClassName('response');
@@ -117,23 +131,15 @@ class ResponsesDisplay {
       this.displayElement.style.display = 'flex';
     }
   }
-  clear() {
-    while (this.displayElement.firstChild) {
-      this.displayElement.removeChild(this.displayElement.firstChild);
-    }
-  }
 }
 
-const responsesDisplay = new ResponsesDisplay(document.getElementById('responses'), document.getElementById('hide'));
+const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'));
 
 
 
 /* Players Display */
 
-class PlayersDisplay {
-  constructor(displayElement) {
-    this.displayElement = displayElement;
-  }
+class PlayersDisplay extends Display {
   render(list) {
     for (const key in list) {
       const div = document.createElement('div');
@@ -143,18 +149,26 @@ class PlayersDisplay {
       p.innerText = list[key].name + ' (' + list[key].score + ')';
       div.append(p);
       const buttonDiv = document.createElement('div');
-      const add = document.createElement('button');
-      add.innerText = 'Add';
-      add.addEventListener('click', () => {
-        playersDatabase.set(list[key].score + 1, '/' + key + '/score');
-      });
-      buttonDiv.append(add);
       const subtract = document.createElement('button');
       subtract.innerText = 'Subtract';
       subtract.addEventListener('click', () => {
         playersDatabase.set(list[key].score - 1, '/' + key + '/score');
       });
       buttonDiv.append(subtract);
+      const add = document.createElement('button');
+      add.innerText = 'Add';
+      add.addEventListener('click', () => {
+        playersDatabase.set(list[key].score + 1, '/' + key + '/score');
+      });
+      buttonDiv.append(add);
+      [subtract, add].forEach(item => {
+        item.addEventListener('mouseover', () => {
+          div.classList.add('buttonHover');
+        });
+        item.addEventListener('mouseout', () => {
+          div.classList.remove('buttonHover');
+        });
+      });      
       div.append(buttonDiv);
       if (list[key].highlight) {
         div.classList.add('clicked');
@@ -164,22 +178,31 @@ class PlayersDisplay {
           playersDatabase.set(!list[key].highlight, '/' + key + '/highlight');
         }
       });
-      this.displayElement.insertBefore(div, document.getElementById('newPlayer'));
+      this.displayElement.append(div);
     }
   }
-  clear() {
-    while (this.displayElement.children.length > 1) {
-      this.displayElement.removeChild(this.displayElement.firstChild);
+  hide(state) {
+    if (state) {
+      this.hideElement.innerText = 'Reveal';
+      this.displayElement.style.display = 'none';
+      document.getElementById('playersClear').style.display = 'none';
+      document.getElementById('playerInput').style.display = 'none';
+    } else {
+      this.hideElement.innerText = 'Hide';
+      this.displayElement.style.display = 'flex';
+      document.getElementById('playersClear').style.display = 'block';
+      document.getElementById('playerInput').style.display = 'flex';
     }
   }
 }
 
-const playersDisplay = new PlayersDisplay(document.getElementById('players'));
+const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay'), document.getElementById('playersHide'));
 
 
 
 /* Listen and render */
 
+//Responses
 let firstTime = 1;
 responsesDatabase.listen((list) => {
   if (firstTime) {
@@ -192,7 +215,8 @@ document.getElementById('responsesClear').addEventListener('click', () => {
   responsesDatabase.clear();
 });
 
-document.getElementById('hide').addEventListener('click', function() {
+//Responses hide
+document.getElementById('responsesHide').addEventListener('click', function() {
   hideDatabase.set(this.children[0].innerText === 'Hide');
 });
 responsesDisplay.hide(hideDatabase.get());
@@ -200,6 +224,7 @@ hideDatabase.listen((state) => {
   responsesDisplay.hide(state);
 });
 
+//Players
 playersDatabase.listen((list) => {
   playersDisplay.clear();
   playersDisplay.render(list);
@@ -208,27 +233,26 @@ document.getElementById('playersClear').addEventListener('click', () => {
   playersDatabase.clear();
 });
 
+//Player hide
+document.getElementById('playersHide').addEventListener('click', function() {
+  playersDisplay.hide(this.innerText === 'Hide');
+});
+
 
 
 /* Submit */
 
-document.getElementById('form').onsubmit = function(val) {
+document.getElementById('responseInput').onsubmit = function(val) {
   responsesDatabase.push({value: val.target[0].value, highlight: 0});
   this.reset();
   return false;
 };
 
-const newPlayer = document.getElementById('newPlayer');
-function addPlayer() {
+document.getElementById('playerInput').onsubmit = function(val) {
   playersDatabase.push({name: newPlayer.value, highlight: 0, score: 0});
-  newPlayer.value = '';
-}
-newPlayer.addEventListener('change', addPlayer);
-newPlayer.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    addPlayer();
-  }
-});
+  this.reset();
+  return false;
+};
 
 
 

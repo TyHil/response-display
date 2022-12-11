@@ -19,6 +19,7 @@ html, body {
   --light0: #E9F4F2; /*#fff*/
   --light1: #CCD7D5; /*#dfdfdf*/
   --light2: #AFBAB8; /*#bfbfbf*/
+  --dark3: #596462; /*#606060*/
   --dark2: #3C4745; /*#404040*/
   --dark1: #1F2A28; /*#202020*/
   --dark0: #020D0B; /*#000*/
@@ -62,6 +63,7 @@ textarea::-webkit-scrollbar-track {
     --light0: #020D0B; /*#000*/
     --light1: #1F2A28; /*#202020*/
     --light2: #2D3836; /*#303030*/
+    --dark3: #93A3A0; /*#9f9f9f*/
     --dark2: #AFBAB8; /*#bfbfbf*/
     --dark1: #CCD7D5; /*#dfdfdf*/
     --dark0: #E9F4F2; /*#fff*/
@@ -132,9 +134,9 @@ header {
   margin: 0;
 }
 #byLine {
-  height: 1.6rem;
   display: inline-block;
-  padding: 0.8rem 1rem 0.6rem 1rem;
+  line-height: 1.6rem;
+  padding: 0.7rem 1rem 0.7rem 1rem;
   border-radius: 1.5rem;
   transition: background-color 0.2s;
   text-align: center;
@@ -142,75 +144,57 @@ header {
 
 /*Main*/
 main {
+  margin: auto;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 75ch;
+  box-sizing: border-box;
 }
 #responses, #players {
-  max-width: 75ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+h3 {
+  margin: 0;
+}
+
+/*Displays*/
+#responseDisplay, #playerDisplay {
   display: flex;
   gap: 0.5rem;
   width: 100%;
 }
-#responses {
+#responseDisplay {
   flex-direction: column;
 }
-#players {
+#playerDisplay {
   flex-wrap: wrap;
-  margin-top: 0.5rem;
 }
+
+/*Buttons*/
+input, button, .response, .player {
+  transition: background-color 200ms;
+  cursor: pointer;
+}
+input:hover, button:hover, .response:hover, .player:hover {
+  background-color: var(--dark2);
+}
+
+/*Responses and players*/
 .response {
   background-color: var(--dark1);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
 }
-p {
-  margin: 0;
-  overflow-wrap: break-word;
-}
-form {
-  margin: 0;
-  width: 100%;
-  max-width: 75ch;
-  margin-bottom: 0.5rem;
-}
-form, #options {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-}
-input, button {
-  border: none;
-  border-radius: 1.5rem;
-  background-color: var(--dark1);
-  color: var(--light0);
-  box-sizing: content-box;
-}
-input, button, .response, .player {
-  transition: background-color 200ms;
-  cursor: pointer;
-}
-#form input {
-  height: 1.6rem;
-  padding: 0.8rem 1rem 0.6rem 1rem;
-}
-input:hover, button:hover, .response:hover, .player:hover {
-  background-color: var(--dark2);
-}
-input[type=text] {
-  flex: 1;
-}
-button {
-  height: 1.25rem;
-  padding: 0.6rem 0.75rem 0.45rem 0.75rem;
-}
-.response.clicked, .player.clicked {
-  opacity: 0.25;
-}
 .player {
-  flex: 1 1rem;
+  flex: 1;
   background-color: var(--dark1);
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -219,8 +203,12 @@ button {
   gap: 0.5rem;
   align-items: center;
 }
-.player p {
-  max-width: calc(75ch - 1rem);
+p {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+.player.buttonHover {
+  background-color: var(--dark1);
 }
 .player div {
   display: flex;
@@ -228,12 +216,42 @@ button {
 }
 .player button {
   padding: 0.2rem 0.5rem 0.15rem 0.5rem;
-  background-color: var(--dark0);
+  background-color: var(--dark2);
 }
-.player button:hover {
+.player:hover button {
+  background-color: var(--dark3);
+}
+
+/*Inputs*/
+form, .options {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+input, button {
+  border: none;
+  border-radius: 1.5rem;
   background-color: var(--dark1);
+  color: var(--light0);
 }
-#newPlayer {
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  border-radius: 999rem;
+form input[type=text] {
+  flex: 1;
+}
+button {
+  line-height: 1.25rem;
+  padding: 0.5rem 0.75rem 0.45rem 0.75rem;
+}
+.response.clicked, .player.clicked {
+  opacity: 0.25;
+}
+#responseInput input {
+  line-height: 1.6rem;
+  padding: 0.75rem 1rem 0.65rem 1rem;
+}
+#playerInput input {
+  line-height: 1rem;
+  padding: 0.5rem 0.75rem 0.4rem 0.75rem;
 }

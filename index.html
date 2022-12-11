@@ -36,24 +36,36 @@
     <a id="byLine" href="/">Tyler Gordon Hill</a>
   </header>
   <main>
-    <form id="form">
-      <input id="newResponse" type="text" placeholder="Add response">
-      <input type="submit" value="Submit">
-    </form>
     <div id="responses">
-      <h3>Loading...</h3>
+      <h3>Responses</h3>
+      <div id="responseDisplay">
+        <h3>Loading...</h3>
+      </div>
+      <form id="responseInput">
+        <input id="newResponse" type="text" placeholder="Add response">
+        <input type="submit" value="Submit">
+      </form>
+      <div class="options">
+        <button id="responsesClear">Clear</button>
+        <button id="responsesHide">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
-    <div id="options">
-      <button id="responsesClear">Clear</button>
-      <button id="hide">
-        <span></span>
-        <span></span>
-      </button>
-    </div>
+
     <div id="players">
-      <input id="newPlayer" type="text" placeholder="Add player">
+      <h3>Players</h3>
+      <div id="playerDisplay"></div>
+      <form id="playerInput">
+        <input id="newPlayer" type="text" placeholder="Add player">
+        <input type="submit" value="Submit">
+      </form>
+      <div class="options">
+        <button id="playersClear">Clear</button>
+        <button id="playersHide">Hide</button>
+      </div>
     </div>
-    <button id="playersClear">Clear</button>
   </main>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>

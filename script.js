@@ -63,9 +63,10 @@ const playersDatabase = new Database(firebaseRef.child('/response-display/player
 /* Display */
 
 class Display {
-  constructor(displayElement, hideElement) {
+  constructor(displayElement, hideElement, toHide) {
     this.displayElement = displayElement;
     this.hideElement = hideElement;
+    this.toHide = toHide;
   }
   render() {}
   clear() {
@@ -121,6 +122,9 @@ class ResponsesDisplay extends Display {
     if (state) {
       this.hideElement.children[0].innerText = 'Reveal';
       this.displayElement.style.display = 'none';
+      this.toHide.forEach(item => {
+        item[0].style.display = 'none';
+      });
     } else {
       if (this.displayElement.children.length) {
         for (let i = this.displayElement.children.length; i >= 0; i--) {
@@ -129,11 +133,14 @@ class ResponsesDisplay extends Display {
       }
       this.hideElement.children[0].innerText = 'Hide';
       this.displayElement.style.display = 'flex';
+      this.toHide.forEach(item => {
+        item[0].style.display = item[1];
+      });
     }
   }
 }
 
-const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'));
+const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'), [[document.getElementById('responsesClear'), 'block']]);
 
 
 
@@ -185,18 +192,20 @@ class PlayersDisplay extends Display {
     if (state) {
       this.hideElement.innerText = 'Reveal';
       this.displayElement.style.display = 'none';
-      document.getElementById('playersClear').style.display = 'none';
-      document.getElementById('playerInput').style.display = 'none';
+      this.toHide.forEach(item => {
+        item[0].style.display = 'none';
+      });
     } else {
       this.hideElement.innerText = 'Hide';
       this.displayElement.style.display = 'flex';
-      document.getElementById('playersClear').style.display = 'block';
-      document.getElementById('playerInput').style.display = 'flex';
+      this.toHide.forEach(item => {
+        item[0].style.display = item[1];
+      });
     }
   }
 }
 
-const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay'), document.getElementById('playersHide'));
+const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay'), document.getElementById('playersHide'), [[document.getElementById('playersClear'), 'block'], [document.getElementById('playerInput'), 'flex']]);
 
 
 

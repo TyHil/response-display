@@ -16,6 +16,18 @@ const firebaseRef = firebase.database().ref();
 
 
 
+/* Favicon */
+const faviconEl = document.querySelector('link[rel="icon"]');
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (event) {
+  if (event.matches) {
+    faviconEl.href = '/response-display/tabicon-light.png';
+  } else {
+    faviconEl.href = '/response-display/tabicon.png';
+  }
+});
+
+
+
 /* Database */
 
 class Database {

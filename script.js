@@ -17,6 +17,7 @@ const firebaseRef = firebase.database().ref();
 
 
 /* Favicon */
+
 const faviconEl = document.querySelector('link[rel="icon"]');
 window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (event) {
   if (event.matches) {

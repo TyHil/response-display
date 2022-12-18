@@ -15,7 +15,7 @@ html, body {
 }
 
 /*Dark Mode*/
-:root { /*Gradient color average: #128A74 10 midpoints first choice*/
+:root, ::before, ::after { /*Gradient color average: #128A74 10 midpoints first choice*/
   --light0: #E9F4F2; /*#fff*/
   --light1: #CCD7D5; /*#dfdfdf*/
   --light2: #AFBAB8; /*#bfbfbf*/
@@ -59,7 +59,7 @@ textarea::-webkit-scrollbar-track {
 
 /*Light Mode*/
 @media (prefers-color-scheme: light) {
-  :root {
+  :root, ::before, ::after {
     --light0: #020D0B; /*#000*/
     --light1: #1F2A28; /*#202020*/
     --light2: #2D3836; /*#303030*/
@@ -142,11 +142,55 @@ header {
   text-align: center;
 }
 
+/*playerOperator*/
+#playerOperator {
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+#playerOperator button {
+  line-height: 1.6rem;
+  padding: 0.75rem 1rem 0.65rem 1rem;
+}
+
+/*Gradient button*/
+.featured {
+  background-image: var(--primary);
+  color: var(--dark0);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.featured::before, .featured::after {
+  position: absolute;
+  transition: opacity 0.2s;
+  opacity: 0;
+  border-radius: 1.5rem;
+}
+.featured::before{
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: var(--secondary);
+}
+.featured::after {
+  color: var(--dark0);
+}
+.featured:hover::before, .featured:hover::after {
+  opacity: 1;
+}
+
 /*Main*/
 main {
   margin: auto;
   padding: 1rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
@@ -214,6 +258,9 @@ p {
   display: flex;
   gap: 0.25rem;
 }
+.restrictOptions .player div {
+  display: none;
+}
 .player button {
   padding: 0.2rem 0.5rem 0.15rem 0.5rem;
   background-color: var(--dark2);
@@ -231,6 +278,9 @@ form, .options {
   justify-content: center;
   flex-wrap: wrap;
 }
+.restrictOptions .options {
+  display: none;
+}
 input, button {
   border: none;
   border-radius: 1.5rem;
@@ -240,6 +290,12 @@ input, button {
 form input[type=text] {
   flex: 1;
 }
+#responseInput button::after {
+  content: "Submit";
+}
+#playerInput button::after {
+  content: "Add";
+}
 button {
   line-height: 1.25rem;
   padding: 0.5rem 0.75rem 0.45rem 0.75rem;
@@ -247,11 +303,14 @@ button {
 .response.clicked, .player.clicked {
   opacity: 0.25;
 }
-#responseInput input {
+#responseInput input, #responseInput button {
   line-height: 1.6rem;
   padding: 0.75rem 1rem 0.65rem 1rem;
 }
-#playerInput input {
+#playerInput input, #playerInput button {
   line-height: 1rem;
   padding: 0.5rem 0.75rem 0.4rem 0.75rem;
+}
+.restrictOptions #playerInput {
+  display: none;
 }

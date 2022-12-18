@@ -27,7 +27,7 @@
   
   <!-- Link Tags -->
   <link rel="icon" href="/response-display/tabicon.png" />
-  <link href="response-display/style.css" rel="stylesheet" type="text/css" />
+  <link href="/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -35,6 +35,10 @@
     <h2 id="title">Response Display</h2>
     <a id="byLine" href="/">Tyler Gordon Hill</a>
   </header>
+  <div id="playerOperator">
+    <button id="player">Player</button>
+    <button id="operator">Operator</button>
+  </div>
   <main>
     <div id="responses">
       <h3>Responses</h3>
@@ -43,7 +47,7 @@
       </div>
       <form id="responseInput">
         <input id="newResponse" type="text" placeholder="Add response">
-        <input type="submit" value="Submit">
+        <button type="submit" class="featured">Submit</button>
       </form>
       <div class="options">
         <button id="responsesClear">Clear</button>
@@ -59,7 +63,7 @@
       <div id="playerDisplay"></div>
       <form id="playerInput">
         <input id="newPlayer" type="text" placeholder="Add player">
-        <input type="submit" value="Submit">
+        <button type="submit" class="featured">Add</button>
       </form>
       <div class="options">
         <button id="playersClear">Clear</button>
@@ -70,7 +74,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-  <script src="response-display/script.js"></script>
+  <script src="/script.js"></script>
 </body>
 
 </html>

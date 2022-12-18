@@ -29,6 +29,20 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', fu
 
 
 
+/* Player/Operator */
+document.getElementById('operator').addEventListener('click', function() {
+  document.getElementById('playerOperator').style.display = 'none';
+  document.getElementsByTagName('main')[0].style.display = 'flex';
+});
+
+document.getElementById('player').addEventListener('click', function() {
+  document.body.classList.add('restrictOptions');
+  document.getElementById('playerOperator').style.display = 'none';
+  document.getElementsByTagName('main')[0].style.display = 'flex';
+});
+
+
+
 /* Database */
 
 class Database {
@@ -214,8 +228,9 @@ class PlayersDisplay extends Display {
       if (list[key].highlight) {
         div.classList.add('clicked');
       }
-      div.addEventListener('click', function(e) {
-        if (e.target === this || e.target === this.children[0] || e.target === this.children[1]) {
+      div.addEventListener('click', (e) => {
+        console.log(e.target === div, e.target === div.children[0], e.target === div.children[1]);
+        if (e.target === div || e.target === div.children[0] || e.target === div.children[1]) {
           this.elementFunctions.highlight(!list[key].highlight, key);
         }
       });
@@ -241,7 +256,7 @@ const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay
     playersDatabase.set(set, '/' + key + '/score');
   },
   'highlight': (set, key) => {
-    responsesDatabase.set(set, '/' + key + '/highlight');
+    playersDatabase.set(set, '/' + key + '/highlight');
   }
 });
 
@@ -293,13 +308,17 @@ document.getElementById('playersHide').addEventListener('click', function() {
 /* Submit */
 
 document.getElementById('responseInput').onsubmit = function(val) {
-  responsesDatabase.push({value: val.target[0].value, highlight: 0});
+  if (val.target[0].value !== '') {
+    responsesDatabase.push({value: val.target[0].value, highlight: 0});
+  }
   this.reset();
   return false;
 };
 
 document.getElementById('playerInput').onsubmit = function(val) {
-  playersDatabase.push({name: newPlayer.value, highlight: 0, score: 0});
+  if (val.target[0].value !== '') {
+    playersDatabase.push({name: val.target[0].value, highlight: 0, score: 0});
+  }
   this.reset();
   return false;
 };

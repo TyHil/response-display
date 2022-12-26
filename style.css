@@ -56,6 +56,9 @@ textarea::-webkit-scrollbar-track {
 #byLine:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+.featured, .featured::after {
+  color: var(--dark0);
+}
 
 /*Light Mode*/
 @media (prefers-color-scheme: light) {
@@ -90,6 +93,9 @@ textarea::-webkit-scrollbar-track {
   }
   #byLine:hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+  .featured, .featured::after {
+    color: var(--light1);
   }
 }
 
@@ -159,7 +165,6 @@ header {
 /*Gradient button*/
 .featured {
   background-image: var(--primary);
-  color: var(--dark0);
   position: relative;
   display: flex;
   align-items: center;
@@ -178,9 +183,6 @@ header {
   bottom: 0;
   left: 0;
   background-image: var(--secondary);
-}
-.featured::after {
-  color: var(--dark0);
 }
 .featured:hover::before, .featured:hover::after {
   opacity: 1;

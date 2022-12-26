@@ -30,6 +30,7 @@ window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', fu
 
 
 /* Player/Operator */
+
 document.getElementById('operator').addEventListener('click', function() {
   document.getElementById('playerOperator').style.display = 'none';
   document.getElementsByTagName('main')[0].style.display = 'flex';

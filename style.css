@@ -5,7 +5,10 @@ html, body {
   padding: 0;
 }
 
-/*prefers-reduced-motion*/
+
+
+/* Accessibility */
+
 @media screen and (prefers-reduced-motion: reduce), (update: slow) {
   * {
     animation-duration: 0.001ms !important;
@@ -14,7 +17,10 @@ html, body {
   }
 }
 
-/*Dark Mode*/
+
+
+/* Dark Mode */
+
 :root, ::before, ::after { /*Gradient color average: #128A74 10 midpoints first choice*/
   --light0: #E9F4F2; /*#fff*/
   --light1: #CCD7D5; /*#dfdfdf*/
@@ -60,7 +66,10 @@ textarea::-webkit-scrollbar-track {
   color: var(--dark0);
 }
 
-/*Light Mode*/
+
+
+/* Light Mode */
+
 @media (prefers-color-scheme: light) {
   :root, ::before, ::after {
     --light0: #020D0B; /*#000*/
@@ -99,7 +108,10 @@ textarea::-webkit-scrollbar-track {
   }
 }
 
-/*Scrollbar*/
+
+
+/* Scrollbar */
+
 body {
   scrollbar-width: thin;
 }
@@ -117,14 +129,20 @@ body {
   border-radius: 0.25rem;
 }
 
-/*Body*/
+
+
+/* Body */
+
 body {
   font-family: Tahoma, sans-serif;
   background-color: var(--dark0);
   color: var(--light0);
 }
 
-/*Header*/
+
+
+/* Header */
+
 header {
   display: flex;
   flex-direction: column;
@@ -148,7 +166,10 @@ header {
   text-align: center;
 }
 
-/*playerOperator*/
+
+
+/* playerOperator */
+
 #playerOperator {
   padding: 1rem;
   box-sizing: border-box;
@@ -162,7 +183,10 @@ header {
   padding: 0.75rem 1rem 0.65rem 1rem;
 }
 
-/*Gradient button*/
+
+
+/* Gradient button */
+
 .featured {
   background-image: var(--primary);
   position: relative;
@@ -188,7 +212,10 @@ header {
   opacity: 1;
 }
 
-/*Main*/
+
+
+/* Main */
+
 main {
   margin: auto;
   padding: 1rem;
@@ -211,7 +238,10 @@ h3, h4 {
   margin: 0;
 }
 
-/*Displays*/
+
+
+/* Displays */
+
 #responseDisplay, #playerDisplay {
   display: flex;
   gap: 0.5rem;
@@ -224,7 +254,10 @@ h3, h4 {
   flex-wrap: wrap;
 }
 
-/*Buttons*/
+
+
+/* Buttons */
+
 input, button, .response, .player {
   transition: background-color 200ms;
   cursor: pointer;
@@ -233,7 +266,10 @@ input:hover, button:hover, .response:hover, .player:hover {
   background-color: var(--dark2);
 }
 
-/*Responses and players*/
+
+
+/* Responses and players */
+
 .response {
   background-color: var(--dark1);
   border-radius: 0.5rem;
@@ -271,7 +307,10 @@ p {
   background-color: var(--dark3);
 }
 
-/*Inputs*/
+
+
+/* Inputs */
+
 form, .options {
   margin: 0;
   width: 100%;

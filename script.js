@@ -230,7 +230,6 @@ class PlayersDisplay extends Display {
         div.classList.add('clicked');
       }
       div.addEventListener('click', (e) => {
-        console.log(e.target === div, e.target === div.children[0], e.target === div.children[1]);
         if (e.target === div || e.target === div.children[0] || e.target === div.children[1]) {
           this.elementFunctions.highlight(!list[key].highlight, key);
         }

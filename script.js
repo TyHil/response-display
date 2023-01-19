@@ -172,7 +172,7 @@ class ResponsesDisplay extends Display {
   }
 }
 
-const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide').children[0], document.getElementById('responsesHide').children[1], {
+const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'), document.getElementById('responsesTitle').children[0], {
   'extraHide': () => {
     document.getElementById('responsesClear').style.display = 'none';
   }, 
@@ -281,7 +281,7 @@ document.getElementById('responsesClear').addEventListener('click', () => {
 
 //Responses hide
 document.getElementById('responsesHide').addEventListener('click', function() {
-  hideDatabase.set(this.children[0].innerText === 'Hide');
+  hideDatabase.set(this.innerText === 'Hide');
 });
 hideDatabase.listen((state) => {
   responsesDisplay.hide(state);

@@ -256,9 +256,11 @@ h3, h4 {
 
 /* Buttons */
 
+button, .response, .player {
+  cursor: pointer;
+}
 input, button, .response, .player {
   transition: background-color 200ms;
-  cursor: pointer;
 }
 input:hover, input:focus-visible, button:hover, button:focus-visible, .response:hover, .response:focus-visible, .player:hover, .player:focus-visible {
   background-color: var(--dark2);

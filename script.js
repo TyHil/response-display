@@ -19,7 +19,7 @@ const firebaseRef = firebase.database().ref();
 /* Favicon */
 
 const faviconEl = document.querySelector('link[rel="icon"]');
-window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (event) {
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(event) {
   if (event.matches) {
     faviconEl.href = '/response-display/tabicon-light.png';
   } else {
@@ -97,13 +97,13 @@ class Display {
     this.extraHides = extraHides;
     this.elementFunctions = elementFunctions;
   }
-  render() {}
+  render() { }
   clear() {
     while (this.displayElement.firstChild) {
       this.displayElement.removeChild(this.displayElement.firstChild);
     }
   }
-  shuffle() {}
+  shuffle() { }
   hide(state) {
     if (state) {
       this.hideElement.innerText = 'Reveal';
@@ -166,7 +166,7 @@ class ResponsesDisplay extends Display {
   shuffle() {
     if (this.displayElement.children.length) {
       for (let i = this.displayElement.children.length; i >= 0; i--) {
-          this.displayElement.append(this.displayElement.children[Math.random() * i | 0]);
+        this.displayElement.append(this.displayElement.children[Math.random() * i | 0]);
       }
     }
   }
@@ -175,9 +175,9 @@ class ResponsesDisplay extends Display {
 const responsesDisplay = new ResponsesDisplay(document.getElementById('responseDisplay'), document.getElementById('responsesHide'), document.getElementById('responsesTitle').children[0], {
   'extraHide': () => {
     document.getElementById('responsesClear').style.display = 'none';
-  }, 
+  },
   'extraShow': () => {
-  document.getElementById('responsesClear').style.display = 'flex';
+    document.getElementById('responsesClear').style.display = 'flex';
   }
 }, {
   'highlight': (set, key) => {
@@ -224,7 +224,7 @@ class PlayersDisplay extends Display {
         item.addEventListener('mouseout', () => {
           div.classList.remove('buttonHover');
         });
-      });      
+      });
       div.append(buttonDiv);
       if (list[key].highlight) {
         div.classList.add('clicked');
@@ -243,10 +243,10 @@ const playersDisplay = new PlayersDisplay(document.getElementById('playerDisplay
   'extraHide': () => {
     document.getElementById('playersClear').style.display = 'none';
     document.getElementById('playerInput').style.display = 'none';
-  }, 
+  },
   'extraShow': () => {
-  document.getElementById('playersClear').style.display = 'block';
-  document.getElementById('playerInput').style.display = 'flex';
+    document.getElementById('playersClear').style.display = 'block';
+    document.getElementById('playerInput').style.display = 'flex';
   }
 }, {
   'remove': (key) => {
@@ -309,7 +309,7 @@ document.getElementById('playersHide').addEventListener('click', function() {
 
 document.getElementById('responseInput').onsubmit = function(val) {
   if (val.target[0].value !== '') {
-    responsesDatabase.push({value: val.target[0].value, highlight: 0});
+    responsesDatabase.push({ value: val.target[0].value, highlight: 0 });
   }
   this.reset();
   return false;
@@ -317,7 +317,7 @@ document.getElementById('responseInput').onsubmit = function(val) {
 
 document.getElementById('playerInput').onsubmit = function(val) {
   if (val.target[0].value !== '') {
-    playersDatabase.push({name: val.target[0].value, highlight: 0, score: 0});
+    playersDatabase.push({ name: val.target[0].value, highlight: 0, score: 0 });
   }
   this.reset();
   return false;

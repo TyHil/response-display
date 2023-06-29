@@ -1,6 +1,8 @@
 /* Firebase */
 
-firebase.initializeApp({
+window.firebase = window.firebase || [];
+
+window.firebase.initializeApp({
   apiKey: 'AIzaSyBqUCCFOsGpHaYAMk7Lgpp1PeWC34lCS4s',
   authDomain: 'tylergordonhill-c8339.firebaseapp.com',
   databaseURL: 'https://tylergordonhill-c8339-default-rtdb.firebaseio.com',
@@ -10,9 +12,9 @@ firebase.initializeApp({
   appId: '1:10243950475:web:ff9abba5961c2fc49c918e'
 });
 
-firebase.appCheck().activate('6LfVw0sjAAAAAN0-OJ7XqY-MmsV2dFz_uOAP2QET', true);
+window.firebase.appCheck().activate('6LfVw0sjAAAAAN0-OJ7XqY-MmsV2dFz_uOAP2QET', true);
 
-const firebaseRef = firebase.database().ref();
+const firebaseRef = window.firebase.database().ref();
 
 
 

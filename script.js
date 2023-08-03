@@ -334,3 +334,12 @@ document.body.addEventListener('keydown', function(e) { //enable enter while tab
     document.activeElement.click();
   }
 });
+
+
+
+/* Google Analytics */
+
+window.dataLayer = window.dataLayer || [];
+function gtag() { window.dataLayer.push(arguments); }
+gtag("js", new Date());
+gtag("config", "G-BVTJ5JS3H2");

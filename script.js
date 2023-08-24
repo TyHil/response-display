@@ -6,16 +6,11 @@ const firebaseRef = firebase.database().ref();
 
 
 
-/* Favicon */
+/* Tab Icon */
 
-const faviconEl = document.querySelector('link[rel="icon"]');
-window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(event) {
-  if (event.matches) {
-    faviconEl.href = '/response-display/tabicon-light.png';
-  } else {
-    faviconEl.href = '/response-display/tabicon.png';
-  }
-});
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+  document.querySelector('link[rel="icon"]').href = 'response-display/tabicon-light.png';
+}
 
 
 
@@ -190,31 +185,26 @@ class PlayersDisplay extends Display {
       div.append(p);
       const buttonDiv = document.createElement('div');
       const remove = document.createElement('button');
+      remove.classList.add('small');
       remove.innerText = 'Remove';
       remove.addEventListener('click', () => {
         this.elementFunctions.remove(key);
       });
       buttonDiv.append(remove);
       const subtract = document.createElement('button');
+      subtract.classList.add('small');
       subtract.innerText = 'Subtract';
       subtract.addEventListener('click', () => {
         this.elementFunctions.set(list[key].score - 1, key);
       });
       buttonDiv.append(subtract);
       const add = document.createElement('button');
+      add.classList.add('small');
       add.innerText = 'Add';
       add.addEventListener('click', () => {
         this.elementFunctions.set(list[key].score + 1, key);
       });
       buttonDiv.append(add);
-      [remove, subtract, add].forEach(item => {
-        item.addEventListener('mouseover', () => {
-          div.classList.add('buttonHover');
-        });
-        item.addEventListener('mouseout', () => {
-          div.classList.remove('buttonHover');
-        });
-      });
       div.append(buttonDiv);
       if (list[key].highlight) {
         div.classList.add('clicked');

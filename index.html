@@ -1,103 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <!-- HTML Meta Tags -->
+    <title>Response Display</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Collect and display responses from various devices." />
+    <meta name="canonical" href="https://tylergordonhill.com/response-display" />
+    <meta name="theme-color" content="#128A74" />
 
-<head>
-  <!-- HTML Meta Tags -->
-  <title>Response Display</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Collect and display responses from various devices." />
-  <meta name="canonical" href="https://tylergordonhill.com/response-display" />
-  <meta name="theme-color" content="#128A74" />
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Response Display" />
-  <meta property="og:description" content="Collect and display responses from various devices."/>
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tylergordonhill.com/response-display" />
-  <meta property="og:image" content="https://tylergordonhill.com/response-display/linkpreview.png" />
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:alt" content="Screenshot of the website displaying sample responses with options to submit more, clear, and hide the list. ">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Response Display" />
+    <meta property="og:description" content="Collect and display responses from various devices." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tylergordonhill.com/response-display" />
+    <meta
+      property="og:image"
+      content="https://tylergordonhill.com/response-display/linkpreview.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta
+      property="og:image:alt"
+      content="Screenshot of the website displaying sample responses with options to submit more, clear, and hide the list. "
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:domain" content="tylergordonhill.com" />
-  
-  <!-- Link Tags -->
-  <link rel="icon" href="/response-display/tabicon.png" />
-  <link href="https://tylergordonhill.com/global.css" rel="stylesheet" type="text/css" />
-  <link href="response-display/style.css" rel="stylesheet" type="text/css" />
-</head>
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:domain" content="tylergordonhill.com" />
 
-<body>
-  <header>
-    <h2 id="title">Response Display</h2>
-    <a id="byLine" href="/">Tyler Gordon Hill</a>
-  </header>
+    <!-- Link Tags -->
+    <link rel="icon" href="/response-display/tabicon.png" />
+    <link href="https://tylergordonhill.com/global.css" rel="stylesheet" type="text/css" />
+    <link href="response-display/style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-  <div id="playerOperator">
-    <button id="player" class="large">Player</button>
-    <button id="operator" class="large">Operator</button>
-  </div>
+  <body>
+    <header>
+      <h2 id="title">Response Display</h2>
+      <a id="byLine" href="/">Tyler Gordon Hill</a>
+    </header>
 
-  <main>
-    <div id="responses">
-      <h3 id="responsesTitle">Responses<span></span></h3>
-      <div id="responseDisplay">
-        <h4>Loading...</h4>
+    <div id="playerOperator">
+      <button id="player" class="large">Player</button>
+      <button id="operator" class="large">Operator</button>
+    </div>
+
+    <main>
+      <div id="responses">
+        <h3 id="responsesTitle">Responses<span></span></h3>
+        <div id="responseDisplay">
+          <h4>Loading...</h4>
+        </div>
+        <form id="responseInput">
+          <input id="newResponse" class="large" type="text" placeholder="Add response" />
+          <button type="submit" class="large featured">Submit</button>
+        </form>
+        <div class="options">
+          <button id="responsesClear" class="medium">Clear</button>
+          <button id="responsesHide" class="medium"></button>
+        </div>
       </div>
-      <form id="responseInput">
-        <input id="newResponse" class="large" type="text" placeholder="Add response">
-        <button type="submit" class="large featured">Submit</button>
-      </form>
-      <div class="options">
-        <button id="responsesClear" class="medium">Clear</button>
-        <button id="responsesHide" class="medium"></button>
+
+      <div id="players">
+        <h3>Players</h3>
+        <div id="playerDisplay"></div>
+        <form id="playerInput">
+          <input id="newPlayer" class="medium" type="text" placeholder="Add player" />
+          <button type="submit" class="medium featured">Add</button>
+        </form>
+        <div class="options">
+          <button id="playersClear" class="medium">Clear</button>
+          <button id="playersHide" class="medium">Hide</button>
+        </div>
       </div>
-    </div>
+    </main>
 
-    <div id="players">
-      <h3>Players</h3>
-      <div id="playerDisplay"></div>
-      <form id="playerInput">
-        <input id="newPlayer" class="medium" type="text" placeholder="Add player">
-        <button type="submit" class="medium featured">Add</button>
-      </form>
-      <div class="options">
-        <button id="playersClear" class="medium">Clear</button>
-        <button id="playersHide" class="medium">Hide</button>
+    <footer>
+      <div>
+        <p><strong>Contact and Social</strong></p>
+        <a href="mailto:tylergordonhill@gmail.com" target="_blank" rel="noopener">Email</a>
+        <a href="http://www.linkedin.com/in/tylergordonhill" target="_blank" rel="noopener"
+          >LinkedIn</a
+        >
+        <a href="https://github.com/TyHil" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://replit.com/@TylerGHill" target="_blank" rel="noopener">Replit</a>
+        <a href="https://thangs.com/TylerHill" target="_blank" rel="noopener">Thangs</a>
       </div>
-    </div>
-  </main>
+      <div>
+        <p><strong>Subsites</strong></p>
+        <a href="/set-operations-for-spotify">Set Operations for Spotify</a>
+        <a href="/typewriter-formatting">Typewriter Formatting</a>
+        <a href="/cah-maker">Cards Against Humanity Card Maker</a>
+        <a href="/response-display">Response Display</a>
+        <a href="/password-generator">Password Generator</a>
+        <a href="/recipes">Recipes</a>
+      </div>
+    </footer>
 
-  <footer>
-    <div>
-      <p><strong>Contact and Social</strong></p>
-      <a href="mailto:tylergordonhill@gmail.com" target="_blank" rel="noopener">Email</a>
-      <a href="http://www.linkedin.com/in/tylergordonhill" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/TyHil" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://replit.com/@TylerGHill" target="_blank" rel="noopener">Replit</a>
-      <a href="https://thangs.com/TylerHill" target="_blank" rel="noopener">Thangs</a>
-    </div>
-    <div>
-      <p><strong>Subsites</strong></p>
-      <a href="/set-operations-for-spotify">Set Operations for Spotify</a>
-      <a href="/typewriter-formatting">Typewriter Formatting</a>
-      <a href="/cah-maker">Cards Against Humanity Card Maker</a>
-      <a href="/response-display">Response Display</a>
-      <a href="/password-generator">Password Generator</a>
-      <a href="/recipes">Recipes</a>
-    </div>
-  </footer>
-
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics-compat.js"></script>
-  <script src="https://tylergordonhill.com/global.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-check-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-database-compat.js"></script>
-  <script src="response-display/script.js"></script>
-</body>
-
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics-compat.js"></script>
+    <script src="https://tylergordonhill.com/global.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-check-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-database-compat.js"></script>
+    <script src="response-display/script.js"></script>
+  </body>
 </html>

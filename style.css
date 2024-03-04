@@ -1,6 +1,5 @@
 /* STYLE GUIDE */
 
-
 /* Header */
 
 #title {
@@ -9,9 +8,10 @@
 #byLine {
   color: var(--dark1);
   -webkit-text-decoration-color: var(--dark1);
-          text-decoration-color: var(--dark1);
+  text-decoration-color: var(--dark1);
 }
-#byLine:hover, #byLine:focus-visible {
+#byLine:hover,
+#byLine:focus-visible {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -22,9 +22,10 @@
   #byLine {
     color: var(--light2);
     -webkit-text-decoration-color: var(--light2);
-            text-decoration-color: var(--light2);
+    text-decoration-color: var(--light2);
   }
-  #byLine:hover, #byLine:focus-visible {
+  #byLine:hover,
+  #byLine:focus-visible {
     background-color: rgba(0, 0, 0, 0.1);
   }
 }
@@ -49,65 +50,75 @@ header {
   text-align: center;
 }
 
-
-
 /* Inputs */
 
 /*General*/
 
-input, button {
+input,
+button {
   border: none;
 }
-input.large, button.large {
+input.large,
+button.large {
   font-family: Tahoma, sans-serif;
 }
-.largeInputBox{
+.largeInputBox {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-.smallInputBox{
+.smallInputBox {
   display: flex;
   gap: 0.3rem;
 }
 .inputBox:not(.checkbox) {
   justify-content: space-between;
 }
-input.disabled, label.disabled {
+input.disabled,
+label.disabled {
   color: var(--light2);
   cursor: default;
 }
 
 /*Button*/
 
-button, a.button {
+button,
+a.button {
   background-color: var(--dark1);
   color: var(--light0);
   transition: background-color 200ms;
 }
-button.disabled, a.button.disabled, button:disabled {
+button.disabled,
+a.button.disabled,
+button:disabled {
   background-color: var(--dark2);
   color: var(--light2);
   cursor: default;
 }
-button.small, a.button.small {
+button.small,
+a.button.small {
   font-size: 0.8rem;
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
 }
-button.medium, a.button.medium {
+button.medium,
+a.button.medium {
   font-size: 1rem;
   line-height: 1rem;
   padding: 0.45rem 0.75rem;
   border-radius: 1.5rem;
 }
-button.large, a.button.large {
+button.large,
+a.button.large {
   font-size: 1rem;
   line-height: 1.6rem;
   padding: 0.7rem 1rem;
   border-radius: 1.5rem;
 }
-button:hover, button:focus-visible, a.button:hover, a.button:focus-visible {
+button:hover,
+button:focus-visible,
+a.button:hover,
+a.button:focus-visible {
   background-color: var(--dark2);
 }
 a.button {
@@ -118,41 +129,57 @@ a.button {
 
 /*Text, number, and textarea*/
 
-input[type=text], input[type=number], textarea {
+input[type='text'],
+input[type='number'],
+textarea {
   background-color: var(--dark1);
   color: var(--light0);
 }
-input[type=text].disabled, input[type=number].disabled, textarea.disabled, input[type=text]:disabled, input[type=number]:disabled, textarea:disabled {
+input[type='text'].disabled,
+input[type='number'].disabled,
+textarea.disabled,
+input[type='text']:disabled,
+input[type='number']:disabled,
+textarea:disabled {
   background-color: var(--dark2);
   color: var(--light2);
 }
 input::placeholder {
   color: var(--light2);
 }
-input[type=text], input[type=number], textarea {
+input[type='text'],
+input[type='number'],
+textarea {
   border: none;
 }
-input[type=text], input[type=number] {
+input[type='text'],
+input[type='number'] {
   transition: background-color 200ms;
 }
-input[type=text].small, input[type=number].small, textarea {
+input[type='text'].small,
+input[type='number'].small,
+textarea {
   margin: 0.1rem 0;
   padding: 0.15rem 0.25rem;
   border-radius: 0.25rem;
 }
-input[type=text].medium, input[type=number].medium {
+input[type='text'].medium,
+input[type='number'].medium {
   line-height: 1rem;
   padding: 0.45rem 0.75rem;
   border-radius: 1.5rem;
 }
-input[type=text].large, input[type=number].large {
+input[type='text'].large,
+input[type='number'].large {
   font-size: 1rem;
   line-height: 1.6rem;
   padding: 0.7rem 1rem;
   border-radius: 1.5rem;
 }
-input[type=text]:hover, input[type=text]:focus-visible,
-input[type=number]:hover, input[type=number]:focus-visible {
+input[type='text']:hover,
+input[type='text']:focus-visible,
+input[type='number']:hover,
+input[type='number']:focus-visible {
   background-color: var(--dark2);
 }
 /*Scrollbar*/
@@ -179,83 +206,115 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 /*File*/
 
-input[type=file]::file-selector-button {
+input[type='file']::file-selector-button {
   border: none;
   border-radius: 0.25rem;
   background-color: var(--dark1);
   color: var(--light0);
   cursor: pointer;
 }
-input[type=file].disabled::file-selector-button, input[type=file]:disabled::file-selector-button {
+input[type='file'].disabled::file-selector-button,
+input[type='file']:disabled::file-selector-button {
   background-color: var(--dark2);
   color: var(--light2);
 }
-input[type=file]::file-selector-button:hover, input[type=file]:focus-visible::file-selector-button {
+input[type='file']::file-selector-button:hover,
+input[type='file']:focus-visible::file-selector-button {
   background-color: var(--dark2);
 }
-input[type=file]::file-selector-button {
+input[type='file']::file-selector-button {
   line-height: 1rem;
   padding: 0.2rem 0.5rem;
 }
 
-
-
 /* Featured Buttons */
 
-button.featured, a.button.featured {
+button.featured,
+a.button.featured {
   background-image: var(--primary);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-button.featured.disabled, a.button.featured.disabled, button.featured:disabled {
+button.featured.disabled,
+a.button.featured.disabled,
+button.featured:disabled {
   background: var(--dark2);
   color: var(--light2);
   cursor: default;
 }
-button.featured.disabled:hover::before, button.featured:disabled:hover::before, a.button.featured.disabled:hover::before, button.featured.disabled:focus-visible::before, button.featured:disabled:focus-visible::before, a.button.featured.disabled:focus-visible::before, button.featured.disabled:hover::after, button.featured:disabled:hover::after, a.button.featured.disabled:hover::after, button.featured.disabled:focus-visible::after, button.featured:disabled:focus-visible::after, a.button.featured.disabled:focus-visible::after {
+button.featured.disabled:hover::before,
+button.featured:disabled:hover::before,
+a.button.featured.disabled:hover::before,
+button.featured.disabled:focus-visible::before,
+button.featured:disabled:focus-visible::before,
+a.button.featured.disabled:focus-visible::before,
+button.featured.disabled:hover::after,
+button.featured:disabled:hover::after,
+a.button.featured.disabled:hover::after,
+button.featured.disabled:focus-visible::after,
+button.featured:disabled:focus-visible::after,
+a.button.featured.disabled:focus-visible::after {
   opacity: 0;
 }
-button.featured::before, a.button.featured::before, button.featured::after, a.button.featured::after {
+button.featured::before,
+a.button.featured::before,
+button.featured::after,
+a.button.featured::after {
   position: absolute;
   transition: opacity 200ms;
   opacity: 0;
   border-radius: 1.5rem;
 }
-button.small.featured::before, a.button.small.featured::before, button.small.featured::after, a.button.small.featured::after {
+button.small.featured::before,
+a.button.small.featured::before,
+button.small.featured::after,
+a.button.small.featured::after {
   border-radius: 0.25rem;
 }
-button.featured::before, a.button.featured::before {
-  content: "";
+button.featured::before,
+a.button.featured::before {
+  content: '';
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-image: var(--secondary);
 }
-button.featured, a.button.featured, button.featured::after, a.button.featured::after {
+button.featured,
+a.button.featured,
+button.featured::after,
+a.button.featured::after {
   color: var(--dark0);
 }
 @media (prefers-color-scheme: light) {
-  button.featured, a.button.featured, button.featured::after, a.button.featured::after {
+  button.featured,
+  a.button.featured,
+  button.featured::after,
+  a.button.featured::after {
     color: var(--light0);
   }
 }
-button.featured:hover::before, a.button.featured:hover::before, button.featured:focus-visible::before, a.button.featured:focus-visible::before, button.featured:hover::after, a.button.featured:hover::after, button.featured:focus-visible::after, a.button.featured:focus-visible::after {
+button.featured:hover::before,
+a.button.featured:hover::before,
+button.featured:focus-visible::before,
+a.button.featured:focus-visible::before,
+button.featured:hover::after,
+a.button.featured:hover::after,
+button.featured:focus-visible::after,
+a.button.featured:focus-visible::after {
   opacity: 1;
 }
 
 /*Extra*/
 
 #responseInput button::after {
-  content: "Submit";
+  content: 'Submit';
 }
 #playerInput button::after {
-  content: "Add";
+  content: 'Add';
 }
-
-
 
 /* Footer */
 
@@ -276,7 +335,8 @@ footer div {
 footer div p {
   margin-bottom: 0.25rem;
 }
-footer div a, footer div a:visited {
+footer div a,
+footer div a:visited {
   color: var(--light1);
   text-decoration-color: transparent;
   transition: text-decoration-color 200ms;
@@ -292,14 +352,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-#playerOperator, main {
+#playerOperator,
+main {
   margin-bottom: auto;
 }
 
-
-
 /* STYLES */
-
 
 /* playerOperator */
 
@@ -311,8 +369,6 @@ body {
   justify-content: center;
   gap: 0.5rem;
 }
-
-
 
 /* Main */
 
@@ -327,22 +383,23 @@ main {
   max-width: 75ch;
   box-sizing: border-box;
 }
-#responses, #players {
+#responses,
+#players {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
 }
-h3, h4 {
+h3,
+h4 {
   margin: 0;
 }
 
-
-
 /* Displays */
 
-#responseDisplay, #playerDisplay {
+#responseDisplay,
+#playerDisplay {
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -353,8 +410,6 @@ h3, h4 {
 #playerDisplay {
   flex-wrap: wrap;
 }
-
-
 
 /* Responses and players */
 
@@ -373,7 +428,10 @@ h3, h4 {
   gap: 0.5rem;
   align-items: center;
 }
-.response:hover, .response:focus-visible, .player:hover, .player:focus-visible {
+.response:hover,
+.response:focus-visible,
+.player:hover,
+.player:focus-visible {
   background-color: var(--dark2);
 }
 p {
@@ -391,21 +449,25 @@ p {
   padding: 0.2rem 0.5rem 0.15rem 0.5rem;
   background-color: var(--dark2);
 }
-.player:has( button:hover), .player:has( button:focus-visible) {
+.player:has(button:hover),
+.player:has(button:focus-visible) {
   background-color: var(--dark1);
 }
-.player:hover button, .player:focus-visible button, .player button:hover, .player button:focus-visible {
+.player:hover button,
+.player:focus-visible button,
+.player button:hover,
+.player button:focus-visible {
   background-color: var(--dark3);
 }
-.player:has( button:hover) button:not(:hover), .player:has( button:focus-visible) button:not(:focus-visible) {
+.player:has(button:hover) button:not(:hover),
+.player:has(button:focus-visible) button:not(:focus-visible) {
   background-color: var(--dark2);
 }
 
-
-
 /* Inputs */
 
-form, .options {
+form,
+.options {
   margin: 0;
   width: 100%;
   display: flex;
@@ -416,10 +478,11 @@ form, .options {
 .restrictOptions .options {
   display: none;
 }
-form input[type=text] {
+form input[type='text'] {
   flex: 1;
 }
-.response.clicked, .player.clicked {
+.response.clicked,
+.player.clicked {
   opacity: 0.25;
 }
 .restrictOptions #playerInput {

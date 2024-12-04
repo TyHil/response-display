@@ -37,6 +37,7 @@
     <link href="/style-guide/inputs/style.css" rel="stylesheet" type="text/css" />
     <link href="/style-guide/inputs/featured/style.css" rel="stylesheet" type="text/css" />
     <link href="/style-guide/footer/style.css" rel="stylesheet" type="text/css" />
+    <link href="/style-guide/modal/style.css" rel="stylesheet" type="text/css" />
     <link href="/response-display/style.css" rel="stylesheet" type="text/css" />
   </head>
 
@@ -109,9 +110,20 @@
       </div>
     </footer>
 
+    <div id="playersClearConfirm" class="modalBg out">
+      <div class="modal">
+        <h2>Clear Players?</h2>
+        <div class="options">
+          <button id="playersClearNo" class="medium">No</button>
+          <button id="playersClearYes" class="medium">Yes</button>
+        </div>
+      </div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics-compat.js"></script>
     <script src="/style-guide/script.js"></script>
+    <script src="/style-guide/modal/script.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-check-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-database-compat.js"></script>
     <script src="/response-display/script.js"></script>

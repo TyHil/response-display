@@ -20,6 +20,12 @@ footer {
   margin-top: auto;
 }
 
+/* Modal Extra */
+
+.modal {
+  height: fit-content;
+}
+
 /* STYLES */
 
 /* playerOperator */

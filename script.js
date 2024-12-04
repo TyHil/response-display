@@ -274,8 +274,15 @@ playersDatabase.listen(list => {
 });
 
 //Players clear
+const playersClearConfirm = document.getElementById('playersClearConfirm');
 document.getElementById('playersClear').addEventListener('click', () => {
-  playersDatabase.clear();
+  openModal(playersClearConfirm);
+});
+document.getElementById('playersClearNo').addEventListener('click', () => {
+  closeModal(playersClearConfirm);
+});
+document.getElementById('playersClearYes').addEventListener('click', () => {
+  playersDatabase.clear().then(() => closeModal(playersClearConfirm));
 });
 
 //Player hide

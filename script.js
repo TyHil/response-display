@@ -193,14 +193,19 @@ class PlayersDisplay extends Display {
       remove.innerText = 'Remove';
       remove.addEventListener('click', () => {
         openModal(playerRemoveConfirm);
-        playerRemoveConfirm.getElementsByTagName('h2')[0].innerText = 'Remove ' + list[key].name + '?'
+        playerRemoveConfirm.getElementsByTagName('h2')[0].innerText =
+          'Remove ' + list[key].name + '?';
         controller.abort();
         controller = new AbortController();
         signal = controller.signal;
-        document.getElementById('playerRemoveYes').addEventListener('click', () => {
-          this.elementFunctions.remove(key);
-          closeModal(playerRemoveConfirm);
-        }, { once: true, signal });
+        document.getElementById('playerRemoveYes').addEventListener(
+          'click',
+          () => {
+            this.elementFunctions.remove(key);
+            closeModal(playerRemoveConfirm);
+          },
+          { once: true, signal }
+        );
       });
       buttonDiv.append(remove);
       const subtract = document.createElement('button');

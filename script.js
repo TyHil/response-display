@@ -171,6 +171,13 @@ const responsesDisplay = new ResponsesDisplay(
 
 /* Players Display */
 
+const playerRemoveConfirm = document.getElementById('playerRemoveConfirm');
+document.getElementById('playerRemoveNo').addEventListener('click', () => {
+  closeModal(playerRemoveConfirm);
+});
+let controller = new AbortController();
+let { signal } = controller;
+
 class PlayersDisplay extends Display {
   render(list) {
     for (const key in list) {
@@ -185,7 +192,15 @@ class PlayersDisplay extends Display {
       remove.classList.add('small');
       remove.innerText = 'Remove';
       remove.addEventListener('click', () => {
-        this.elementFunctions.remove(key);
+        openModal(playerRemoveConfirm);
+        playerRemoveConfirm.getElementsByTagName('h2')[0].innerText = 'Remove ' + list[key].name + '?'
+        controller.abort();
+        controller = new AbortController();
+        signal = controller.signal;
+        document.getElementById('playerRemoveYes').addEventListener('click', () => {
+          this.elementFunctions.remove(key);
+          closeModal(playerRemoveConfirm);
+        }, { once: true, signal });
       });
       buttonDiv.append(remove);
       const subtract = document.createElement('button');

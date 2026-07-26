@@ -314,7 +314,7 @@ document.getElementById('playersHide').addEventListener('click', function () {
 
 document.getElementById('responseInput').onsubmit = function (val) {
   if (val.target[0].value !== '') {
-    responsesDatabase.push({ value: val.target[0].value, highlight: 0 });
+    responsesDatabase.push({ value: val.target[0].value, highlight: false });
   }
   this.reset();
   return false;
@@ -322,7 +322,7 @@ document.getElementById('responseInput').onsubmit = function (val) {
 
 document.getElementById('playerInput').onsubmit = function (val) {
   if (val.target[0].value !== '') {
-    playersDatabase.push({ name: val.target[0].value, highlight: 0, score: 0 });
+    playersDatabase.push({ name: val.target[0].value, highlight: false, score: 0 });
   }
   this.reset();
   return false;

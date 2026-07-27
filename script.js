@@ -312,17 +312,43 @@ document.getElementById('playersHide').addEventListener('click', function () {
 
 /* Submit */
 
+const responseSizeLimit = 1000;
+const newResponse = document.getElementById('newResponse');
+function updateResponseForm(value) {
+  const disabled = value === '' || value.length >= responseSizeLimit;
+  document.getElementById('newResponseSubmit').disabled = disabled;
+  const invalid = value.length >= responseSizeLimit;
+  newResponse.setCustomValidity(invalid ? 'Too long.' : '');
+}
+newResponse.addEventListener('input', function (val) {
+  updateResponseForm(val.target.value.trim());
+});
+updateResponseForm(newResponse.value.trim());
 document.getElementById('responseInput').onsubmit = function (val) {
-  if (val.target[0].value !== '') {
-    responsesDatabase.push({ value: val.target[0].value, highlight: false });
+  const value = val.target[0].value.trim();
+  if (value !== '' && value.length < responseSizeLimit) {
+    responsesDatabase.push({ value: value, highlight: false });
   }
   this.reset();
   return false;
 };
 
+const playerSizeLimit = 200;
+const newPlayer = document.getElementById('newPlayer');
+function updatePlayerForm(value) {
+  const disabled = value === '' || value.length >= playerSizeLimit;
+  document.getElementById('newPlayerAdd').disabled = disabled;
+  const invalid = value.length >= playerSizeLimit;
+  newPlayer.setCustomValidity(invalid ? 'Too long.' : '');
+}
+newPlayer.addEventListener('input', function (val) {
+  updatePlayerForm(val.target.value.trim());
+});
+updatePlayerForm(newPlayer.value.trim());
 document.getElementById('playerInput').onsubmit = function (val) {
-  if (val.target[0].value !== '') {
-    playersDatabase.push({ name: val.target[0].value, highlight: false, score: 0 });
+  const value = val.target[0].value.trim();
+  if (value !== '' && value.length < playerSizeLimit) {
+    playersDatabase.push({ name: value, highlight: false, score: 0 });
   }
   this.reset();
   return false;

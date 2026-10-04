@@ -46,7 +46,7 @@
   <body>
     <header>
       <h2 id="title">Response Display</h2>
-      <a id="byLine" href="/">Tyler Gordon Hill</a>
+      <a id="byLine" class="button large ripple" href="/">Tyler Gordon Hill</a>
     </header>
 
     <div id="playerOperator">
@@ -62,12 +62,12 @@
         </div>
         <form id="responseInput">
           <input id="newResponse" class="large" type="text" placeholder="Add response" />
-          <button id="newResponseSubmit" type="submit" class="large featured" disabled
+          <button id="newResponseSubmit" type="submit" class="large featured ripple" disabled
             >Submit</button
           >
         </form>
         <div class="options">
-          <button id="responsesClear" class="medium">Clear</button>
+          <button id="responsesClear" class="medium ripple">Clear</button>
           <button id="responsesHide" class="medium"></button>
         </div>
       </div>
@@ -77,10 +77,12 @@
         <div id="playerDisplay"></div>
         <form id="playerInput">
           <input id="newPlayer" class="medium" type="text" placeholder="Add player" />
-          <button id="newPlayerAdd" type="submit" class="medium featured" disabled>Add</button>
+          <button id="newPlayerAdd" type="submit" class="medium featured ripple" disabled
+            >Add</button
+          >
         </form>
         <div class="options">
-          <button id="playersClear" class="medium">Clear</button>
+          <button id="playersClear" class="medium ripple">Clear</button>
           <button id="playersHide" class="medium">Hide</button>
         </div>
       </div>
@@ -111,7 +113,7 @@
         <a href="/legal/privacy-policy">Privacy Policy</a>
         <a href="/sitemap.xml">Sitemap</a>
       </div>
-      <button id="footer-theme" class="large circle">
+      <button id="footer-theme" class="large circle ripple">
         <img class="svg" src="/style-guide/footer/theme.svg" alt="Theme icon" />
       </button>
     </footer>
@@ -163,6 +165,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics-compat.js"></script>
     <script src="/style-guide/script.js"></script>
+    <script src="/style-guide/inputs/script.js"></script>
     <script src="/style-guide/modal/script.js"></script>
     <script src="/style-guide/footer/script.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-check-compat.js"></script>
